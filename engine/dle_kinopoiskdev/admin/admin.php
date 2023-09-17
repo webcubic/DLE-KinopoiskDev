@@ -37,6 +37,8 @@ echo <<<HTML
         <table class="table table-striped">
 HTML;
 
+showRow('Введите ваш API токен от kinopoisk.dev:', 'Вы можете написать боту <a href="https://t.me/kinopoiskdev_bot" target="_blank" rel="noreferrer">в телеграм</a>, он выдаст вам бесплатный токен от сервиса.', showInput(['settings[kinopoiskdev_token]', 'text', $config_kinopoiskdev['settings']['kinopoiskdev_token']]));
+
 echo <<<HTML
 	    </table>
 	</div>
