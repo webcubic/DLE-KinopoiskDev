@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dleplugin>
+	<name>Parser API KinopoiskDev</name>
+	<description>Получайте максимум данных о фильмах,
+сериалах, мультфильмах и т.д. максимально
+быстро с помощью API KinopoiskDev.</description>
+	<icon></icon>
+	<version>1.0.0</version>
+	<dleversion>15.0</dleversion>
+	<versioncompare>greater</versioncompare>
+	<upgradeurl>https://t.me/webcubic</upgradeurl>
+	<filedelete>0</filedelete>
+	<needplugin></needplugin>
+	<mnotice>0</mnotice>
+	<mysqlinstall><![CDATA[]]></mysqlinstall>
+	<mysqlupgrade><![CDATA[]]></mysqlupgrade>
+	<mysqlenable><![CDATA[INSERT IGNORE INTO `{prefix}_admin_sections` (`name`, `title`, `descr`, `icon`, `allow_groups`) VALUES ('kinopoiskdev_parser', 'Parser API KinopoiskDev', 'Настройки парсера KinopoiskDev', '', '1');]]></mysqlenable>
+	<mysqldisable><![CDATA[DELETE FROM `{prefix}_admin_sections` WHERE `name` = 'kinopoiskdev_parser';]]></mysqldisable>
+	<mysqldelete><![CDATA[DELETE FROM `{prefix}_admin_sections` WHERE `name` = 'kinopoiskdev_parser';]]></mysqldelete>
+	<phpinstall><![CDATA[]]></phpinstall>
+	<phpupgrade><![CDATA[]]></phpupgrade>
+	<phpenable><![CDATA[]]></phpenable>
+	<phpdisable><![CDATA[]]></phpdisable>
+	<phpdelete><![CDATA[]]></phpdelete>
+	<notice><![CDATA[]]></notice>
+	<file name="engine/inc/kinopoiskdev_parser.php">
+		<operation action="create">
+			<replacecode><![CDATA[<?php
+
+if ( !defined( 'DATALIFEENGINE' ) OR !defined( 'LOGGED_IN' )) {
+	die( 'Hacking attempt!' );
+}
+
+if (!$user_group[$member_id['user_group']]['admin_complaint']) {
+	msg('error', $lang['index_denied'], $lang['index_denied']);
+}
+
+include ENGINE_DIR . '/dle_kinopoiskdev/admin/admin.php';
+
+?>]]></replacecode>
+			<enabled>1</enabled>
+		</operation>
+	</file>
+	<file name="engine/ajax/kinopoiskdev_save.php">
+		<operation action="create">
+			<replacecode><![CDATA[<?php
+
+if( !defined('DATALIFEENGINE' ) ) {
+	die('Hacking attempt!');
+}
+
+if (!$user_group[$member_id['user_group']]['admin_complaint']) {
+	msg('error', $lang['index_denied'], $lang['index_denied']);
+}
+
+include ENGINE_DIR . '/dle_kinopoiskdev/ajax/save.php';
+
+?>]]></replacecode>
+			<enabled>1</enabled>
+		</operation>
+	</file>
+</dleplugin>
