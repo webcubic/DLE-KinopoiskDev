@@ -42,7 +42,38 @@ showRow('Введите ваш API токен от kinopoisk.dev:', 'Вы мож
 echo <<<HTML
 	    </table>
 	</div>
+	<button type="submit" class="btn bg-teal btn-raised position-left"><i class="fa fa-floppy-o position-left"></i>{$lang['user_save']}</button>
 </form>
+
+<script>
+    $(function() {
+    	function ajax_save_option() {
+    		var data_form = $('form').serialize();
+    		$.post('/engine/ajax/controller.php?mod=kinopoiskdev_save', {data_form: data_form, action: 'options', user_hash: '{$dle_login_hash}'}, function(data) {
+    			data = jQuery.parseJSON(data);
+    			if (!data.success) {
+    				Growl.error({
+    					title: 'Ошибка сохранения!',
+    					text: 'Проверьте права доступа к файлу настроек'
+    				});
+    			} else {
+    				Growl.info({
+    					title: 'Настройки применены!',
+    					text: 'Настройки модуля были успешно сохранены',
+    					icon: 'success'
+    				});
+    			}
+    		});
+    		return false;
+    	}
+
+    	$('body').on('submit', 'form', function(e) {
+    		e.preventDefault();
+    		ajax_save_option();
+    		return false;
+    	});
+    });
+</script>
 HTML;
 
 ?>
