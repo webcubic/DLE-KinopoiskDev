@@ -17,4 +17,6 @@ if ( !defined( 'DATALIFEENGINE' ) OR !defined( 'LOGGED_IN' )) {
 require_once ENGINE_DIR . '/dle_kinopoiskdev/data/config.php';
 require_once ENGINE_DIR . '/dle_kinopoiskdev/functions/admin.php';
 
+echoheader( "<span class=\"text-semibold\">Parser API KinopoiskDev</span>", 'Настройка модуля парсер кинопоиск (kinopoisk.dev)' );
+
 ?>
